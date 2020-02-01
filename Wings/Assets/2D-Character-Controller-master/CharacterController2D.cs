@@ -137,20 +137,24 @@ public class CharacterController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            jTimer = Time.fixedDeltaTime;
+            //jTimer -= Time.deltaTime;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             Debug.Log("Player air jumped: " + (jumpCounter - 1) + " jumps left.");
 
-        } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer > 0.015f)
+        } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer <= 0f)
         {
-            //NEED TO FIXing
+          
             // Add force to the player while in the air.
             //m_Grounded = false;
             //m_Rigidbody2D.AddForce(new Vector2(0f, 200));
-            jTimer = 0.01f;
-            m_Rigidbody2D.AddRelativeForce(new Vector2(0f, m_JumpForce/2));
+            jTimer = 0.5f;
+             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce + 100f));
             jumpCounter -= 1;
-            Debug.Log("Player air jumped: " + (jumpCounter-1) + " jumps left.");
+             Debug.Log("Player air jumped: " + (jumpCounter-1) + " jumps left.");
+            
+        }else if (!m_Grounded && jumpCounter >1)
+        {
+            jTimer -= Time.deltaTime;
         }
 
         
@@ -171,12 +175,13 @@ public class CharacterController2D : MonoBehaviour
     public void resetJumpCounter()
     {
         jumpCounter = jumpLevel;
+        jTimer = 0.5f;
         //jTimer = ;
         Debug.Log("Player landed: Jumps rest to max");
     }
 
     private void Update()
     {
-        Debug.Log(jTimer);
+       // Debug.Log(jTimer);
     }
 }
