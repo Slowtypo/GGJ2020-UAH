@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnFloor : MonoBehaviour
 {
     public GameObject asteroidPrefab;
     public GameObject FloorThickPrefab2;
+    public GameObject TextUpdate;
 
     public float respawnTime = 1.0f;
     public float respawnTime2 = 1.0f;
     public float levelSpeed = 0.5f;
     private Vector2 screenBounds;
+
+    bool Trung = false;
 
     // Use this for initialization
     void Start()
@@ -20,10 +24,26 @@ public class SpawnFloor : MonoBehaviour
         StartCoroutine(FloorTile2Wave());
         
     }
+    private void Update()
+    {
+        
+        if(levelSpeed >= 3f && Trung == false)
+        {
+            AddLevel();
+            Trung = true;
+        }else if (levelSpeed > 5f) {
+            //TextUpdate.AddComponent<CharacterController2D>().jumpLevel += 5;
+        }
+    }
+
+    void AddLevel ()
+    {
+        TextUpdate.AddComponent<CharacterController2D>().jumpLevel += 1;
+    }
     private void spawnFloorTiles()
     {
         GameObject a = Instantiate(asteroidPrefab) as GameObject;
-        a.transform.position = new Vector2( Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 2);
+        a.transform.position = new Vector2( Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1);
         a.transform.localScale = new Vector2 (Random.Range(0.25f,0.5f), 0.04f);
         a.GetComponent<Platforms>().speed *= levelSpeed;
     }

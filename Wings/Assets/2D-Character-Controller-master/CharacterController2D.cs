@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -22,7 +23,11 @@ public class CharacterController2D : MonoBehaviour
     private int jumpCounter;
     public int jumpLevel;
     public GameObject body;
-    
+    public AudioClip jumpM;
+    public AudioClip jumpMA2;
+    AudioSource audioSourceJump;
+    public Text jumpsLeft;
+
 
     [Header("Events")]
 	[Space]
@@ -47,8 +52,9 @@ public class CharacterController2D : MonoBehaviour
 
         // set up
         jumpCounter = jumpLevel;
+        audioSourceJump = GetComponent<AudioSource>();
 
-	}
+    }
 
 	private void FixedUpdate()
 	{
@@ -133,14 +139,16 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
         // If the player should jump...
-        
+       
         if (m_Grounded && jump && repairing == false)
         {
             // Add a vertical force to the player.
             m_Grounded = false;
             //jTimer -= Time.deltaTime;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            audioSourceJump.PlayOneShot(jumpM, 0.6f);
             Debug.Log("Player air jumped: " + (jumpCounter - 1) + " jumps left.");
+
 
         } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer <= 0f && repairing == false)
         {
@@ -151,7 +159,9 @@ public class CharacterController2D : MonoBehaviour
             jTimer = 0.5f;
              m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce + 100f));
             jumpCounter -= 1;
-             Debug.Log("Player air jumped: " + (jumpCounter-1) + " jumps left.");
+            audioSourceJump.PlayOneShot(jumpMA2, 0.5f);
+            Debug.Log("Player air jumped: " + (jumpCounter-1) + " jumps left.");
+
             
         }else if (!m_Grounded && jumpCounter >1)
         {
@@ -183,6 +193,8 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
-       // Debug.Log(jTimer);
+        // Debug.Log(jTimer);
+
+        jumpsLeft.text = "Jumps Left:" + jumpCounter;
     }
 }

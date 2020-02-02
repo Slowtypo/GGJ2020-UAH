@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerDeath : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class TimerDeath : MonoBehaviour
     public float levelTimer=0;
     public float nextIncreseTime;
     public float periodBetween;
+    public Text Timer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,7 @@ public class TimerDeath : MonoBehaviour
     void FixedUpdate()
     {
         //levelTimer += (int)Time.time;
-        
+        Timer.text = "Time: " + (int)levelTimer;
 
     }
 
