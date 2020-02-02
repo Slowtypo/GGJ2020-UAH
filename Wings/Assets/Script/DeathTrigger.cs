@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public GameObject GameOverUI;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,19 +14,19 @@ public class DeathTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Destroy(GameObject.FindWithTag("Player"));
-            Destroy(collision.gameObject, 0.2f);
+            Destroy(collision.gameObject, 0.3f);
             Debug.Log("Player Died");
-            Invoke("Restartgame", 2f);
+            Invoke("Gameover", 0.5f);
         }
         if (collision.gameObject.CompareTag("Player2"))
         {
-            Destroy(GameObject.Find("Player2"),0.2f);
+            Destroy(GameObject.Find("Player2"),0.3f);
             Debug.Log("Player2 Died");
         }
     }
     void Start()
     {
-        
+        GameOverUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,9 +34,17 @@ public class DeathTrigger : MonoBehaviour
     {
         
     }
-    void Restartgame ()
+    public void Restartgame ()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainGameScene");
-        
+        GameOverUI.SetActive(false);
+    }
+
+    public void Gameover()
+    {
+        GameOverUI.SetActive(true);
+        Time.timeScale = 0f;
+        //GameisPaused = true;
     }
 }

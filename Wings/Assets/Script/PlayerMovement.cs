@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+
+            //Invoke("TakeJumpDamageP1",0.1f);
         }
 
         if (Input.GetButtonDown("Crouch"))
