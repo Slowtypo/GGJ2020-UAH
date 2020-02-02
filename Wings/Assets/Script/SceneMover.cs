@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneMover : MonoBehaviour
 {
+
+    public GameObject ResetData;
     public void MovetoMenu()
     {
         SceneManager.LoadScene(0);
@@ -15,7 +17,8 @@ public class SceneMover : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         Time.timeScale = 1f;
-    }
+        ResetData.GetComponent<SpawnFloor>().levelSpeed = 0.5f;
+}
 
     public void MovetoGameMuit()
     {

@@ -7,6 +7,8 @@ public class DeathTrigger : MonoBehaviour
 {
 
     public GameObject GameOverUI;
+    public GameObject ResetData;
+    public GameObject ResetData2;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,6 +41,9 @@ public class DeathTrigger : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainGameScene");
         GameOverUI.SetActive(false);
+        ResetData.GetComponent<SpawnFloor>().levelSpeed = 0.5f;
+        ResetData2.GetComponent<TimerDeath>().levelTimer = 0f;
+        ResetData2.GetComponent<TimerDeath>().nextIncreseTime = 20f;
     }
 
     public void Gameover()
