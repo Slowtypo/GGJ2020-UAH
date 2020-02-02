@@ -70,7 +70,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
     float jTimer = 0;
-    public void Move(float move, bool crouch, bool jump)
+    public void Move(float move, bool crouch, bool jump, bool repairing)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -134,7 +134,7 @@ public class CharacterController2D : MonoBehaviour
 		}
         // If the player should jump...
         
-        if (m_Grounded && jump)
+        if (m_Grounded && jump && repairing == false)
         {
             // Add a vertical force to the player.
             m_Grounded = false;
@@ -142,7 +142,7 @@ public class CharacterController2D : MonoBehaviour
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             Debug.Log("Player air jumped: " + (jumpCounter - 1) + " jumps left.");
 
-        } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer <= 0f)
+        } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer <= 0f && repairing == false)
         {
           
             // Add force to the player while in the air.

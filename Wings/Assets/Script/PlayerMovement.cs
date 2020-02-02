@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     public bool jump = false;
     public bool crouch = false;
+    public bool repairing = false;
     
 
     // Update is called once per frame
@@ -36,12 +37,20 @@ public class PlayerMovement : MonoBehaviour
             crouch = false;
         }
 
+        if (Input.GetButtonUp("Repair"))
+        {
+            repairing = false;
+        }
+
+
+
     }
 
     void FixedUpdate()
     {
         // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, repairing);
+        
         jump = false;
     }
 }
