@@ -145,8 +145,8 @@ public class @InputControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0059cced-f69a-404c-9f54-5b3496200e7b"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Down"",
