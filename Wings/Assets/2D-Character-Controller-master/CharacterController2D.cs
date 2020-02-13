@@ -195,6 +195,6 @@ public class CharacterController2D : MonoBehaviour
     {
         // Debug.Log(jTimer);
 
-        jumpsLeft.text = "Jumps Left:" + jumpCounter;
+        jumpsLeft.text = "Air Jumps Left:" + (jumpCounter -1) ;
     }
 }

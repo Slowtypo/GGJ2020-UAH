@@ -52,7 +52,7 @@ public class SpawnFloor : MonoBehaviour
     {
         GameObject b = Instantiate(FloorThickPrefab2) as GameObject;
         b.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
-        b.transform.localScale = new Vector2(Random.Range(0.4f, 0.8f), 0.12f);
+        b.transform.localScale = new Vector2(Random.Range(1f, 2f), 1.2f);
         b.GetComponent<Platforms>().speed *= levelSpeed;
     }
     IEnumerator asteroidWave()
