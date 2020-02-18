@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     public float armor2;
     public int repairLevel;
     public int repairLevel2;
+    public int scraps;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -36,6 +37,7 @@ public class PlayerStats : MonoBehaviour
         //movementSpeed2 = this.GetComponent<Playermovement2>().runSpeed;
         armor = 0.2f;
         armor2 = 2f;
+        
 
         //audioSourceRepair = GetComponent<AudioSource>();
     }

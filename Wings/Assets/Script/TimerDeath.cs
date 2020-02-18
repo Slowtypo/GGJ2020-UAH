@@ -16,9 +16,9 @@ public class TimerDeath : MonoBehaviour
     void Start()
     {
         levelTimer = 0;
-        this.GetComponent<SpawnFloor>().levelSpeed = 1;
-        nextIncreseTime = 10;
-        periodBetween = 20f;
+        this.GetComponent<SpawnFloor>().levelSpeed = 0.7f;
+        nextIncreseTime = 10 + (int)Random.Range(1f, 5f);
+        periodBetween = 25f;
 
 
     }
