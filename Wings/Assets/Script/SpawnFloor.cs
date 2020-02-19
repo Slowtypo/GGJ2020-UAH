@@ -59,7 +59,7 @@ public class SpawnFloor : MonoBehaviour
     {
         GameObject a = Instantiate(asteroidPrefab) as GameObject;
         a.transform.position = new Vector2( Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1);
-        a.transform.localScale = new Vector2 (Random.Range(0.25f,0.5f), 0.04f);
+        a.transform.localScale = new Vector2 (Random.Range(0.5f,1.2f), 1.2f);
         a.GetComponent<Platforms>().speed *= levelSpeed;
     }
 
