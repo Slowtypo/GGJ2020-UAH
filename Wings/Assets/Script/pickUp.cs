@@ -28,7 +28,7 @@ public class pickUp : MonoBehaviour
     }
     void Start()
     {
-        pickupSource =  GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
+        pickupSource =  GameObject.FindGameObjectWithTag("SoundManager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -10,10 +10,13 @@ public class DeathTrigger : MonoBehaviour
     public GameObject ResetData;
     public GameObject ResetData2;
     public AudioSource Music;
+    public GameObject playerT;
 
     public AudioClip impact;
     public AudioClip restart;
     AudioSource audioSource;
+
+    public GameObject effectDeath;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,9 +24,15 @@ public class DeathTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Destroy(GameObject.FindWithTag("Player"));
-            Destroy(collision.gameObject, 0.15f);
+            Destroy(collision.gameObject, 0.05f);
+
+            GameObject effect = Instantiate(effectDeath) as GameObject;
+            
+            effect.transform.position = new Vector2(collision.transform.position.x, collision.transform.position.y);
+
+            audioSource.PlayOneShot(impact, 0.5F);
             Debug.Log("Player Died");
-            Invoke("Gameover", 0.5f);
+            Invoke("Gameover", 0.4f);
         }
         if (collision.gameObject.CompareTag("Player2"))
         {
@@ -61,7 +70,7 @@ public class DeathTrigger : MonoBehaviour
         Time.timeScale = 0f;
         //GameisPaused = true;
         Music.Stop();
-        audioSource.PlayOneShot(impact, 0.7F);
+        //audioSource.PlayOneShot(impact, 0.5F);
     }
 
     

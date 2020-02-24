@@ -18,6 +18,9 @@ public class PlayerStats : MonoBehaviour
     public int repairLevel;
     public int repairLevel2;
     public int scraps;
+    private int scrapscost;
+
+    public Text scrapCounter;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -45,6 +48,8 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scrapCounter.text = "Scraps: " + scraps;
+
         TakeDamageOverTimeP1(Time.deltaTime / 2);
         //TakeDamageOverTimeP2(Time.deltaTime / armor2);
 
@@ -165,5 +170,28 @@ public class PlayerStats : MonoBehaviour
         GetComponent<Playermovement2>().repairing = true;
 
         healthBar.fillAmount = HP2 / HP2Max;
+    }
+
+   // -------------------------------------//
+
+    public void RepairCore()
+    {
+
+    }
+    public void BuySpeed()
+    {
+
+    }
+    public void BuyAirJump()
+    {
+
+    }
+    public void BuyRecharge()
+    {
+
+    }
+    public void BuySlowHack()
+    {
+
     }
 }

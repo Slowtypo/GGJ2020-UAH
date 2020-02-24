@@ -10,11 +10,13 @@ public class SpawnFloor : MonoBehaviour
     public GameObject FloorThickScraps;
     public GameObject TextUpdate;
     public GameObject TextScarpsUpdate;
+    public GameObject enemy1;
     public Text textLevelUpdate;
 
     public float respawnTime = 1.0f;
     public float respawnTime2 = 6.0f;
     public float respawnTimeScraps = 10f;
+    public float respawnEnemy = 12f;
     public float levelSpeed = 0.5f;
     private Vector2 screenBounds;
     public int scrapsT = 0;
@@ -28,6 +30,7 @@ public class SpawnFloor : MonoBehaviour
         StartCoroutine(asteroidWave());
         StartCoroutine(FloorTile2Wave());
         StartCoroutine(FloorTileScrapsWave());
+        StartCoroutine(EnemyBallWave());
         levelSpeed = 0.5f;
 
 
@@ -77,6 +80,14 @@ public class SpawnFloor : MonoBehaviour
         c.transform.localScale = new Vector2(1.0f, 1.0f);
         c.GetComponent<Platforms>().speed *= levelSpeed;
     }
+
+    private void EnemyBall()
+    {
+        GameObject D = Instantiate(enemy1) as GameObject;
+        D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
+        D.transform.localScale = new Vector2(4.0f, 4.0f);
+        D.GetComponent<Enemy1>().speed1 *= levelSpeed;
+    }
     IEnumerator asteroidWave()
     {
         while (true)
@@ -101,6 +112,15 @@ public class SpawnFloor : MonoBehaviour
         {
             yield return new WaitForSeconds(respawnTimeScraps + (int)Random.Range(1f, 5f));
             spawnFloorTiles3();
+        }
+    }
+
+    IEnumerator EnemyBallWave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(respawnTimeScraps + (int)Random.Range(1f, 5f));
+            EnemyBall();
         }
     }
 }
