@@ -34,10 +34,11 @@ public class DeathTrigger : MonoBehaviour
             Debug.Log("Player Died");
             Invoke("Gameover", 0.4f);
         }
-        if (collision.gameObject.CompareTag("Player2"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(GameObject.Find("Player2"),0.2f);
-            Debug.Log("Player2 Died");
+            Destroy(GameObject.Find("Enemy1"),0.2f);
+            
+            Debug.Log("Enemy dead");
         }
     }
     void Start()

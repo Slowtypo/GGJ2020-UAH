@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyDrain : MonoBehaviour
 {
@@ -26,11 +27,13 @@ public class EnemyDrain : MonoBehaviour
         {
 
             playerStatsHere.HP1 -= 0.15f;
+            playerStatsHere.hpCounter.color = Color.black;
             
             Debug.Log("Damage to player");
         }
         else
         {
+            playerStatsHere.hpCounter.color = Color.white;
             Debug.Log("No Damage");
         }
 

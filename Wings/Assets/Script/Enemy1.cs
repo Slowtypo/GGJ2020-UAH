@@ -9,7 +9,7 @@ public class Enemy1 : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     public bool isPlayerFound;
-    public float speed1 = 1.0f;
+    public float speed1 = 2.0f;
     private Vector2 screenBounds1;
     private Collider2D damageRange;
 

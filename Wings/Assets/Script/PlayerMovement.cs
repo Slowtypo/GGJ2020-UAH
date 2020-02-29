@@ -10,10 +10,13 @@ public class PlayerMovement : MonoBehaviour
     //public InputControls control;
     AudioSource audioSourceRepair;
     public AudioClip Repair;
+    public AudioClip KillM;
     public Animator animatorPlayer;
 
     public WhatMode modeData;
     public Joystick joystick;
+
+    public Collider2D enemyData;
 
 
 
@@ -24,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     public bool jump = false;
     public bool crouch = false;
     public bool repairing = false;
+
+
 
 
 
@@ -71,7 +76,10 @@ public class PlayerMovement : MonoBehaviour
         {
             repairing = false;
             audioSourceRepair.PlayOneShot(Repair, 0.4f);
+            //GetComponent<PlayerStats>().hpCounter.color = Color.yellow;
         }
+        
+        
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -142,4 +150,11 @@ public class PlayerMovement : MonoBehaviour
         
 
     }
+
+   // private void OnTriggerStay2D(Collider2D enemyData)
+   // {
+        //Destroy(GameObject.Find("Enemy1"), 0.2f);
+        //audioSourceRepair.PlayOneShot(KillM, 0.3f);
+       // Debug.Log("In range");
+   // }
 }

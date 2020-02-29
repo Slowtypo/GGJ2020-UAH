@@ -23,6 +23,7 @@ public class PlayerStats : MonoBehaviour
     public Animator playerAnimate;
 
     public Text scrapCounter;
+    public Text hpCounter;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -51,10 +52,22 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // --- For the upgrade system ---
         scrapCounter.text = "Scraps: " + scraps;
-
+        // For UI Screen--
+        hpCounter.text = "" + (int)HP1;
+        
         TakeDamageOverTimeP1(Time.deltaTime / 2);
         //TakeDamageOverTimeP2(Time.deltaTime / armor2);
+
+        if (HP1 <= 0)
+        {
+            HP1 = 0;
+        }
+        if (scraps <= 0)
+        {
+            scraps = 0;
+        }
 
         if (Input.GetButtonDown("Jump") )
         {

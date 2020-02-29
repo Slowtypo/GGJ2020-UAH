@@ -16,7 +16,7 @@ public class SpawnFloor : MonoBehaviour
     public float respawnTime = 1.0f;
     public float respawnTime2 = 6.0f;
     public float respawnTimeScraps = 10f;
-    public float respawnEnemy = 12f;
+    public float respawnEnemy = 14f;
     public float levelSpeed = 0.5f;
     private Vector2 screenBounds;
     public int scrapsT = 0;
@@ -31,24 +31,29 @@ public class SpawnFloor : MonoBehaviour
         StartCoroutine(FloorTile2Wave());
         StartCoroutine(FloorTileScrapsWave());
         StartCoroutine(EnemyBallWave());
-        levelSpeed = 0.5f;
+        //levelSpeed = 0.5f;
 
 
 
     }
     private void Update()
     {
+        // UI Screen--
         scrapsT = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().scraps;
-        TextScarpsUpdate.GetComponent<Text>().text = "Scraps: " + scrapsT;
+        TextScarpsUpdate.GetComponent<Text>().text = " " + scrapsT;
         textLevelUpdate.text = "Level:" + (int)levelSpeed;
 
         if (levelSpeed >= 3f && Trung == false)
         {
-            AddLevel();
+            //AddLevel();
             Trung = true;
         }
+        if (scrapsT <= 0)
+        {
+            scrapsT = 0;
+        }
         //else if (levelSpeed > 5f) {
-            //TextUpdate.GetComponent<CharacterController2D>().jumpLevel = 6;
+        //TextUpdate.GetComponent<CharacterController2D>().jumpLevel = 6;
         //}
 
     }
@@ -83,10 +88,22 @@ public class SpawnFloor : MonoBehaviour
 
     private void EnemyBall()
     {
-        GameObject D = Instantiate(enemy1) as GameObject;
-        D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
-        D.transform.localScale = new Vector2(4.0f, 4.0f);
-        D.GetComponent<Enemy1>().speed1 *= levelSpeed;
+        if (levelSpeed < 3 && levelSpeed >= 1)
+        {
+            GameObject D = Instantiate(enemy1) as GameObject;
+            D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
+            D.transform.localScale = new Vector2(4.0f, 4.0f);
+            D.GetComponent<Enemy1>().speed1 *= levelSpeed + 0.05f;
+            respawnEnemy = 20f;
+        } else if (levelSpeed >= 3)
+        {
+            GameObject D = Instantiate(enemy1) as GameObject;
+            D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
+            D.transform.localScale = new Vector2(4.2f, 4.2f);
+            D.GetComponent<Enemy1>().speed1 *= levelSpeed + 1f;
+            respawnEnemy = 12f;
+        }
+
     }
     IEnumerator asteroidWave()
     {
