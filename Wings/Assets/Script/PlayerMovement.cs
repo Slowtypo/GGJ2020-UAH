@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip Repair;
     public Animator animatorPlayer;
 
+    public WhatMode modeData;
+    public Joystick joystick;
+
+
 
 
     public float runSpeed = 40f;
@@ -38,8 +42,15 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (modeData.isGameOnPhone == true)
+        {
+            horizontalMove = joystick.Horizontal * runSpeed;
+        }
+        else
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        }
+        
 
         if (Input.GetButtonDown("Jump"))
         {
