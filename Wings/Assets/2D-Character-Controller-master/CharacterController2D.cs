@@ -27,6 +27,8 @@ public class CharacterController2D : MonoBehaviour
     public AudioClip jumpMA2;
     AudioSource audioSourceJump;
     public Text jumpsLeft;
+    public GameObject effectJump;
+    public GameObject collision;
 
 
     [Header("Events")]
@@ -152,10 +154,15 @@ public class CharacterController2D : MonoBehaviour
 
         } else if (m_Grounded == false && jump && jumpCounter > 1 && jTimer <= 0f && repairing == false)
         {
-          
+
             // Add force to the player while in the air.
             //m_Grounded = false;
             //m_Rigidbody2D.AddForce(new Vector2(0f, 200));
+            GameObject effect = Instantiate(effectJump) as GameObject;
+
+            effect.transform.position = new Vector2(collision.transform.position.x, collision.transform.position.y);
+
+
             jTimer = 0.5f;
              m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce + 100f));
             jumpCounter -= 1;

@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     //public InputControls control;
     AudioSource audioSourceRepair;
     public AudioClip Repair;
+    public Animator animatorPlayer;
 
 
 
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Skill used");
         }
 
+        animatorPlayer.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
     }
 
@@ -112,4 +114,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
     */
+
+    public void ButtonMoblieJump()
+    {
+        
+            jump = true;
+        
+    }
+
+    public void ButtonMoblieRepair()
+    {
+
+        repairing = false;
+        audioSourceRepair.PlayOneShot(Repair, 0.4f);
+
+        
+
+    }
 }

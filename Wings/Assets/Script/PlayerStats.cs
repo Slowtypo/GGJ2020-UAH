@@ -20,6 +20,8 @@ public class PlayerStats : MonoBehaviour
     public int scraps;
     private int scrapscost;
 
+    public Animator playerAnimate;
+
     public Text scrapCounter;
 
     [Header("Unity Stuff")]
@@ -40,7 +42,8 @@ public class PlayerStats : MonoBehaviour
         //movementSpeed2 = this.GetComponent<Playermovement2>().runSpeed;
         armor = 0.2f;
         armor2 = 2f;
-        
+        playerAnimate.SetBool("Death", false);
+
 
         //audioSourceRepair = GetComponent<AudioSource>();
     }
@@ -89,6 +92,8 @@ public class PlayerStats : MonoBehaviour
         {
             GetComponent<PlayerMovement>().runSpeed = 0;
             GetComponent<PlayerMovement>().repairing = true;
+
+            playerAnimate.SetBool("Death", true);
 
             Debug.Log("PLAYER DEAD");
         }
@@ -174,24 +179,4 @@ public class PlayerStats : MonoBehaviour
 
    // -------------------------------------//
 
-    public void RepairCore()
-    {
-
-    }
-    public void BuySpeed()
-    {
-
-    }
-    public void BuyAirJump()
-    {
-
-    }
-    public void BuyRecharge()
-    {
-
-    }
-    public void BuySlowHack()
-    {
-
-    }
 }
