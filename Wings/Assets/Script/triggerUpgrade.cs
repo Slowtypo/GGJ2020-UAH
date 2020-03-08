@@ -10,7 +10,7 @@ public class triggerUpgrade : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             trigger1 = true;
-            
+            Debug.Log("Entered Upgrade area");
         }
 
     }

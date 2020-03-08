@@ -55,7 +55,7 @@ public class TimerDeath : MonoBehaviour
         {
             nextIncreseTime += Mathf.RoundToInt(periodBetween + Random.Range(1f, 5f));
             
-            this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.2f, 0.5f);
+            this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.2f, 0.4f);
             //levelTimer = 0;
         }
 

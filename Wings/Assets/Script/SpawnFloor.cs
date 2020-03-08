@@ -20,7 +20,7 @@ public class SpawnFloor : MonoBehaviour
     public float respawnTime = 1.0f;
     public float respawnTime2 = 6.0f;
     public float respawnTimeScraps = 10f;
-    public float respawnEnemy = 14f;
+    public float respawnEnemy = 12f;
     public float respawnUpgrade = 14f;
     public float levelSpeed = 0.5f;
     private Vector2 screenBounds;

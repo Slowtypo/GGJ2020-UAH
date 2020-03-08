@@ -8,17 +8,17 @@ public class UpgradeMenu : MonoBehaviour
 
     public PlayerStats statdata;
     public PlayerMovement buttonsData;
-    public triggerUpgrade platformUpgrade;
+    //public triggerUpgrade platformUpgrade1;
     public CharacterController2D statdata2;
     public SpawnFloor levelData;
     public Canvas upgradeUI;
     public Text scrapWarning;
     public int scrapCost;
-    public GameObject pG;
+    //public GameObject pG;
     
     bool isUIopen;
     bool isUpgrade;
-    
+    bool platformInRange;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +26,16 @@ public class UpgradeMenu : MonoBehaviour
         upgradeUI.enabled = false;
         isUIopen = false;
         isUpgrade = buttonsData.openUpgrade;
+        //platformInRange = platformUpgrade1.trigger1;
+        //platformUpgrade1 = pG.GetComponentInChildren<triggerUpgrade>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.G) && isUIopen == false && platformUpgrade.trigger1 == true)
+        platformInRange = FindObjectOfType<triggerUpgrade>().trigger1;
+
+        if (Input.GetKeyDown(KeyCode.G) && isUIopen == false && platformInRange == true)
         {
              isUIopen = true;
             upgradeUI.enabled = true;
@@ -45,9 +48,9 @@ public class UpgradeMenu : MonoBehaviour
             isUIopen = false;
             upgradeUI.enabled = false;
             Time.timeScale = 1f;
-        } 
-
-        if (buttonsData.openUpgrade == true && platformUpgrade.trigger1 == true)
+        }
+        //platformUpgrade1.GetComponentInChildren<triggerUpgrade>().trigger1 == true 
+        if (buttonsData.openUpgrade == true && platformInRange == true)
         {
             Debug.Log("Upgrade menu 1");
             isUIopen = true;
@@ -138,7 +141,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         if (statdata.scraps >= scrapCost && statdata.scraps > 0)
         {
-            levelData.levelSpeed -= 0.5f;
+            levelData.levelSpeed -= 0.8f;
             statdata.scraps -= scrapCost;
             scrapWarning.gameObject.SetActive(false);
         }

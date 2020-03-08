@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - SoundManager
   - Enemy
+  - upgrade
   layers:
   - Default
   - TransparentFX
