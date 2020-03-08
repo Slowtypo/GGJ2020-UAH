@@ -64,6 +64,11 @@ public class PlayerStats : MonoBehaviour
         {
             HP1 = 0;
         }
+
+        if (HP1 > 100)
+        {
+            HP1 = 100;
+        }
         if (scraps <= 0)
         {
             scraps = 0;
@@ -177,12 +182,43 @@ public class PlayerStats : MonoBehaviour
 
        
     }
+    public bool repairON;
+    public void RepairDamageP1ON()
+    {
+        repairON = true;
+        if (HP1 <= HP1Max && HP1 > 0 && repairON == true)
+        {
+            HP1 += 0.1f * repairLevel;
+            HP1 = HP1 + 10;
+        }
+
+        GetComponent<PlayerMovement>().runSpeed = 0;
+        GetComponent<PlayerMovement>().repairing = true;
+
+
+        healthBar.fillAmount = HP1 / HP1Max;
+    }
+
+    public void RepairDamageP1OFF()
+    {
+        repairON = false;
+        GetComponent<PlayerMovement>().runSpeed = movementSpeed;
+
+        if (HP1 > 0)
+        {
+            GetComponent<PlayerMovement>().repairing = false;
+        }
+
+    }
     public void RepairDamageP2()
     {
-        if (HP2 <= HP2Max && HP2 > 0)
+       
+           if (HP1 <= HP1Max && HP1 > 0)
         {
-            HP2 += 0.1f * repairLevel2;
+            HP1 = HP1 + 5 * repairLevel;
         }
+            
+        
 
         GetComponent<Playermovement2>().runSpeed = 0;
         GetComponent<Playermovement2>().repairing = true;

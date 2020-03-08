@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class SpawnFloor : MonoBehaviour
 {
@@ -11,15 +13,19 @@ public class SpawnFloor : MonoBehaviour
     public GameObject TextUpdate;
     public GameObject TextScarpsUpdate;
     public GameObject enemy1;
+    public GameObject upgrade;
     public Text textLevelUpdate;
+    public Text textCores;
 
     public float respawnTime = 1.0f;
     public float respawnTime2 = 6.0f;
     public float respawnTimeScraps = 10f;
     public float respawnEnemy = 14f;
+    public float respawnUpgrade = 14f;
     public float levelSpeed = 0.5f;
     private Vector2 screenBounds;
-    public int scrapsT = 0;
+    public int scrapsT = 10;
+    public int cores;
 
     bool Trung = false;
 
@@ -31,6 +37,7 @@ public class SpawnFloor : MonoBehaviour
         StartCoroutine(FloorTile2Wave());
         StartCoroutine(FloorTileScrapsWave());
         StartCoroutine(EnemyBallWave());
+        StartCoroutine(FloorTileUpgrade());
         //levelSpeed = 0.5f;
 
 
@@ -41,6 +48,7 @@ public class SpawnFloor : MonoBehaviour
         // UI Screen--
         scrapsT = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().scraps;
         TextScarpsUpdate.GetComponent<Text>().text = " " + scrapsT;
+        textCores.GetComponent<Text>().text = "Cores Repaired: " + cores + "/5";
         textLevelUpdate.text = "Level:" + (int)levelSpeed;
 
         if (levelSpeed >= 3f && Trung == false)
@@ -55,7 +63,16 @@ public class SpawnFloor : MonoBehaviour
         //else if (levelSpeed > 5f) {
         //TextUpdate.GetComponent<CharacterController2D>().jumpLevel = 6;
         //}
+        if ( levelSpeed < 0.2f)
+        {
+            levelSpeed = 0.2f;
+        }
 
+        if (cores >= 5)
+        {
+            SceneManager.LoadScene(2);
+            this.gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void AddLevel ()
@@ -86,22 +103,30 @@ public class SpawnFloor : MonoBehaviour
         c.GetComponent<Platforms>().speed *= levelSpeed;
     }
 
+    private void spawnFloorUpgrade()
+    {
+        GameObject e = Instantiate(upgrade) as GameObject;
+        e.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
+        e.transform.localScale = new Vector2(1.0f, 1.0f);
+        e.GetComponent<Platforms>().speed *= levelSpeed;
+    }
+
     private void EnemyBall()
     {
-        if (levelSpeed < 3 && levelSpeed >= 1)
+        if (levelSpeed < 3 && levelSpeed >= 1.6f)
         {
             GameObject D = Instantiate(enemy1) as GameObject;
             D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
-            D.transform.localScale = new Vector2(4.0f, 4.0f);
+            D.transform.localScale = new Vector2(3.0f, 3.0f);
             D.GetComponent<Enemy1>().speed1 *= levelSpeed + 0.05f;
-            respawnEnemy = 20f;
+            respawnEnemy = 18f;
         } else if (levelSpeed >= 3)
         {
             GameObject D = Instantiate(enemy1) as GameObject;
             D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);
             D.transform.localScale = new Vector2(4.2f, 4.2f);
             D.GetComponent<Enemy1>().speed1 *= levelSpeed + 1f;
-            respawnEnemy = 12f;
+            respawnEnemy = 10f;
         }
 
     }
@@ -136,8 +161,17 @@ public class SpawnFloor : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(respawnTimeScraps + (int)Random.Range(1f, 5f));
+            yield return new WaitForSeconds(respawnEnemy + (int)Random.Range(2f, 10f));
             EnemyBall();
+        }
+    }
+
+    IEnumerator FloorTileUpgrade()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(respawnUpgrade + (int)Random.Range(20f, 35f));
+            spawnFloorUpgrade();
         }
     }
 }

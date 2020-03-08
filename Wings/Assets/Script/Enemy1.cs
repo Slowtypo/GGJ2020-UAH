@@ -13,6 +13,8 @@ public class Enemy1 : MonoBehaviour
     private Vector2 screenBounds1;
     private Collider2D damageRange;
 
+    public Animator animEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class Enemy1 : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-
+        animEnemy.SetFloat("Movement", moveSpeed);
 
     }
     private void FixedUpdate()
@@ -57,16 +59,18 @@ public class Enemy1 : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             Vector3 direction = player.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            rb.rotation = angle;
+            //rb.rotation = angle;
             direction.Normalize();
             movement = direction;
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            animEnemy.SetBool("PlayerIsFound",true);
         }
         else
         {
             rb.velocity = new Vector2(0, -speed1);
             //rb.position.Normalize();
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            animEnemy.SetBool("PlayerIsFound", false);
         }
 
         

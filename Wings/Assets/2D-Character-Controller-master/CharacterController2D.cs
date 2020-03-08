@@ -148,7 +148,7 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             //jTimer -= Time.deltaTime;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            audioSourceJump.PlayOneShot(jumpM, 0.6f);
+            audioSourceJump.PlayOneShot(jumpM, 0.5f);
             Debug.Log("Player air jumped: " + (jumpCounter - 1) + " jumps left.");
 
 

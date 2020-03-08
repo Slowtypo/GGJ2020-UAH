@@ -12,21 +12,26 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip Repair;
     public AudioClip KillM;
     public Animator animatorPlayer;
+    public PlayerStats A;
 
     public WhatMode modeData;
     public Joystick joystick;
 
     public Collider2D enemyData;
-
+    //public
 
 
 
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
+    public bool backupStopper = false;
+    public bool backupStopper2 = false;
+
     public bool jump = false;
     public bool crouch = false;
     public bool repairing = false;
+    public bool openUpgrade = false;
 
 
 
@@ -49,13 +54,58 @@ public class PlayerMovement : MonoBehaviour
     {
         if (modeData.isGameOnPhone == true)
         {
-            horizontalMove = joystick.Horizontal * runSpeed;
+            //horizontalMove = joystick.Horizontal * runSpeed;
+            if (joystick.Horizontal >= .3f)
+            {
+                horizontalMove = runSpeed;
+            }
+            else if (joystick.Horizontal <= -.3f) 
+            {
+                horizontalMove = -runSpeed;
+            }
+            else
+            {
+                horizontalMove = 0f;
+            }
+
         }
         else
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         }
+
+        float verticalMove = joystick.Vertical;
         
+
+        if (verticalMove >= 0.6f && backupStopper == false)
+        {
+            jump = true;
+            backupStopper = true;
+            A.TakeJumpDamageP1();
+            //animaotor.SetBool("isJumping", true);
+            Debug.Log("Jump on");
+        } else if (verticalMove < 0.6f && backupStopper == true)
+        {
+            Debug.Log("Jump off");
+            backupStopper = false;
+        }
+
+        if (verticalMove <= -0.6f && backupStopper2 == false)
+        {
+            //crouch = true;
+            backupStopper2 = true;
+            openUpgrade = true;
+            //OpenUpgradeUi();
+
+            //animaotor.SetBool("iscrouhing", true);
+            Debug.Log("Open upgrade");
+        }
+        else if (verticalMove > -0.6f && backupStopper2 == true)
+        {
+          
+            backupStopper2 = false;
+        }
+
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -76,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         {
             repairing = false;
             audioSourceRepair.PlayOneShot(Repair, 0.4f);
-            //GetComponent<PlayerStats>().hpCounter.color = Color.yellow;
+            GetComponent<PlayerStats>().hpCounter.color = Color.white;
         }
         
         
@@ -144,10 +194,10 @@ public class PlayerMovement : MonoBehaviour
     public void ButtonMoblieRepair()
     {
 
-        repairing = false;
+        //repairing = false;
         audioSourceRepair.PlayOneShot(Repair, 0.4f);
+        GetComponent<PlayerStats>().hpCounter.color = Color.white;
 
-        
 
     }
 
