@@ -54,19 +54,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (modeData.isGameOnPhone == true)
         {
-            //horizontalMove = joystick.Horizontal * runSpeed;
-            if (joystick.Horizontal >= .3f)
-            {
-                horizontalMove = runSpeed;
-            }
-            else if (joystick.Horizontal <= -.3f) 
-            {
-                horizontalMove = -runSpeed;
-            }
-            else
-            {
-                horizontalMove = 0f;
-            }
+            horizontalMove = joystick.Horizontal * runSpeed;
+            //if (joystick.Horizontal >= .3f)
+            //{
+              //  horizontalMove = runSpeed;
+            //}
+            //else if (joystick.Horizontal <= -.3f) 
+            //{
+             //   horizontalMove = -runSpeed;
+           // }
+            //else
+            //{
+              //  horizontalMove = 0f;
+            //}
 
         }
         else
