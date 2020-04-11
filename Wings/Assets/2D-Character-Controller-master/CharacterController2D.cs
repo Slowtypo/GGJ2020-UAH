@@ -163,8 +163,10 @@ public class CharacterController2D : MonoBehaviour
             effect.transform.position = new Vector2(collision.transform.position.x, collision.transform.position.y);
 
 
-            jTimer = 0.5f;
-             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce + 100f));
+            jTimer = 0.3f;
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0.1f);
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce - 50f));
+            
             jumpCounter -= 1;
             audioSourceJump.PlayOneShot(jumpMA2, 0.5f);
             Debug.Log("Player air jumped: " + (jumpCounter-1) + " jumps left.");
@@ -174,8 +176,9 @@ public class CharacterController2D : MonoBehaviour
         {
             jTimer -= Time.deltaTime;
         }
+      
 
-        
+
     }
 
 

@@ -11,6 +11,7 @@ public class SceneMover : MonoBehaviour
     public AudioSource Music2;
    
     public AudioClip restart2;
+  
     AudioSource audioSource1;
 
     //public Pause pauseData;
@@ -19,6 +20,7 @@ public class SceneMover : MonoBehaviour
     private void Start()
     {
         audioSource1 = GetComponent<AudioSource>();
+        
     }
     public void MovetoMenu()
     {

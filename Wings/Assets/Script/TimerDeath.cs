@@ -33,29 +33,29 @@ public class TimerDeath : MonoBehaviour
 
     public void levelHarder()
     {
-        this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.1f, 0.2f);
+        this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.05f, 0.15f);
     }
 
     public void levelslower()
     {
         
-        this.GetComponent<SpawnFloor>().levelSpeed -= 0.5f;
+        this.GetComponent<SpawnFloor>().levelSpeed -= 0.2f;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            this.GetComponent<SpawnFloor>().levelSpeed -= 0.5f;
-            Debug.Log("Slowed level");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+          //  this.GetComponent<SpawnFloor>().levelSpeed -= 0.5f;
+           // Debug.Log("Slowed level");
+       // }
 
         levelTimer += Time.deltaTime;
         if (levelTimer > nextIncreseTime)
         {
-            nextIncreseTime += Mathf.RoundToInt(periodBetween + Random.Range(1f, 5f));
+            nextIncreseTime += Mathf.RoundToInt(periodBetween + Random.Range(2f, 6f));
             
-            this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.2f, 0.4f);
+            this.GetComponent<SpawnFloor>().levelSpeed += Random.Range(0.1f, 0.3f);
             //levelTimer = 0;
         }
 

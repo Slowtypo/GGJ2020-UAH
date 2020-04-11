@@ -141,7 +141,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         if (statdata.scraps >= scrapCost && statdata.scraps > 0)
         {
-            levelData.levelSpeed -= 0.8f;
+            levelData.levelSpeed -= 0.2f;
             statdata.scraps -= scrapCost;
             scrapWarning.gameObject.SetActive(false);
         }

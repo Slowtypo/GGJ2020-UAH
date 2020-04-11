@@ -68,6 +68,11 @@ public class SpawnFloor : MonoBehaviour
             levelSpeed = 0.2f;
         }
 
+        if (levelSpeed > 10f)
+        {
+            levelSpeed = 10f;
+        }
+
         if (cores >= 5)
         {
             SceneManager.LoadScene(2);
@@ -113,7 +118,7 @@ public class SpawnFloor : MonoBehaviour
 
     private void EnemyBall()
     {
-        if (levelSpeed < 3 && levelSpeed >= 1.6f)
+        if (levelSpeed < 3 && levelSpeed >= 1.20f)
         {
             GameObject D = Instantiate(enemy1) as GameObject;
             D.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 1.5f);

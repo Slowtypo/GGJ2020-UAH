@@ -77,20 +77,20 @@ public class PlayerMovement : MonoBehaviour
         float verticalMove = joystick.Vertical;
         
 
-        if (verticalMove >= 0.6f && backupStopper == false)
+        if (verticalMove >= 0.5f && backupStopper == false)
         {
             jump = true;
             backupStopper = true;
             A.TakeJumpDamageP1();
             //animaotor.SetBool("isJumping", true);
             Debug.Log("Jump on");
-        } else if (verticalMove < 0.6f && backupStopper == true)
+        } else if (verticalMove < 0.5f && backupStopper == true)
         {
             Debug.Log("Jump off");
             backupStopper = false;
         }
 
-        if (verticalMove <= -0.6f && backupStopper2 == false)
+        if (verticalMove <= -0.5f && backupStopper2 == false)
         {
             //crouch = true;
             backupStopper2 = true;
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
             //animaotor.SetBool("iscrouhing", true);
             Debug.Log("Open upgrade");
         }
-        else if (verticalMove > -0.6f && backupStopper2 == true)
+        else if (verticalMove > -0.5f && backupStopper2 == true)
         {
           
             backupStopper2 = false;

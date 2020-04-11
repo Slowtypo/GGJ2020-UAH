@@ -59,7 +59,7 @@ public class DeathTrigger : MonoBehaviour
         
         SceneManager.LoadScene("MainGameScene");
         GameOverUI.SetActive(false);
-        ResetData.GetComponent<SpawnFloor>().levelSpeed = 0.5f;
+        ResetData.GetComponent<SpawnFloor>().levelSpeed = 0.7f;
         ResetData2.GetComponent<TimerDeath>().levelTimer = 0f;
         ResetData2.GetComponent<TimerDeath>().nextIncreseTime = 20f;
         
